@@ -110,10 +110,10 @@ function getBaseUrl() {
 }
 
 export function getHreflangLinks(common: CommonComposableOptions, ctx: HeadContext) {
-  const { defaultLocale, strategy } = useRuntimeConfig().public.i18n
+  const { defaultLocale, strategy, differentDomains } = useRuntimeConfig().public.i18n
   const links: MetaAttrs[] = []
 
-  if (strategy === 'no_prefix') return links
+  if (strategy === 'no_prefix' && !differentDomains) return links
 
   const localeMap = new Map<string, LocaleObject>()
   for (const locale of ctx.locales) {
